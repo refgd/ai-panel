@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  app:
+    image: refgd/ai-uni:1.2
+    restart: always
+    depends_on:
+      - db
+      - redis
+    ports:
+      - 8080:8001
+    environment:
+      REDIS_ADDRESS: redis
+      MYSQL_ADDRESS: db
+      MYSQL_USER: chatgpt
+      MYSQL_PASSWORD: chatgpt
+      MYSQL_DATABASE: chatgpt
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: chatgpt
+      MYSQL_USER: chatgpt
+      MYSQL_PASSWORD: chatgpt
+      MYSQL_DATABASE: chatgpt
+    volumes:
+      - ./mysql/data:/var/lib/mysql:rw
+      - ./mysql/init.sql.gz:/docker-entrypoint-initdb.d/init.sql.gz
+      - ./mysql/my.cnf:/etc/mysql/my.cnf:ro
+
+  redis:
+    image: "redis:6.2.11-alpine"
+    restart: always
