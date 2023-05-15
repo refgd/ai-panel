@@ -46,7 +46,7 @@ H5前台: http://你的IP:8080/h5/
 ## Docker安装方法
 CentOS / Debian / Ubuntu 服务器执行以下命令
 ```shell
-curl -sSL https://get.daocloud.io/docker | sh
+curl -fsSL https://get.docker.com | sh
 ```
 
 Windows 服务器请自行搜索安装 Docker Desktop
